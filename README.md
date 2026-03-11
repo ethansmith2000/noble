@@ -20,6 +20,8 @@ Then copy `noble.py` to your project, or:
 git clone https://github.com/canva-research/noble.git
 ```
 
+`noble_simple.py` is a much more slimmed down version, that supports only CosNet as the nonlinearity choice, and uses settings from the paper
+
 ## Quick Start
 
 `NOBLELinear` is a drop-in replacement for `nn.Linear`:
