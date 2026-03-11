@@ -4,7 +4,7 @@ Official implementation of [NOBLE: Accelerating Transformers with Nonlinear Low-
 
 ## Overview
 
-NOBLE (**N**onlinear l**O**w-rank **B**ranch for **L**inear **E**nhancement) is an architectural augmentation that adds nonlinear low-rank branches to transformer linear layers. Unlike LoRA and other parameter-efficient fine-tuning methods, NOBLE is designed for **pretraining from scratch**—the branch is a permanent part of the architecture, not an adapter on frozen weights.
+NOBLE (**N**onlinear l**O**w-rank **B**ranch for **L**inear **E**nhancement) is an architectural augmentation that adds nonlinear low-rank branches to transformer linear layers.
 
 The branch computes: **σ(xW_down)W_up** where σ is a learnable nonlinearity.
 
@@ -102,7 +102,7 @@ act = get_nonlinearity("silu", dim=32)          # Standard SiLU/Swish
 
 ### CosActivation
 
-Learnable cosine activation with per-dimension frequency and phase:
+Learnable cosine activation with per dimension frequency and phase:
 
 ```python
 from noble import CosActivation
@@ -122,11 +122,11 @@ Frequency initialization strategies:
 - `"harmonic"`: Linear spacing from min_freq to max_freq
 - `"geometric"`: Log spacing (like positional encodings)
 - `"harmonic_random"`: Uniform random in [min_freq, max_freq]
-- `"geometric_random"`: Log-uniform random
+- `"geometric_random"`: Log uniform random
 
 ## Learning Rate Scaling
 
-NOBLE uses per-parameter learning rate multipliers (via `lr_mult` attributes) to balance optimization between the main linear layer and the low-rank branch. If your optimizer doesn't support this, you can implement it with parameter groups:
+NOBLE uses per parameter learning rate multipliers (via `lr_mult` attributes) to balance optimization between the main linear layer and the low-rank branch. If your optimizer doesn't support this, you can implement it with parameter groups:
 
 ```python
 def get_param_groups(model, base_lr):
